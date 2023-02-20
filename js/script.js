@@ -110,14 +110,17 @@ function OffsetOfdeadLineAndCurrentTime(endOfTime) { // оприділяє рі�
     const modalOpenBtn = document.querySelectorAll('[data-modal]'),
           modal = document.querySelector('.modal'),
           modalCloseBtn = document.querySelector('[data-close]');
-    
-   modalOpenBtn.forEach(btn => {
-        btn.addEventListener('click', () => {
-            modal.classList.add('show');
-            modal.classList.remove('hide');
-            document.body.style.overflow = "hidden";
+        
+
+   function openModal(event) {
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        document.body.style.overflow = "hidden";
+        clearInterval(modalTimerId); 
+   }
+    modalOpenBtn.forEach(btn =>{
+         btn.addEventListener('click', openModal);
     });
-   });
 
    function closeModal() {
         modal.classList.remove('show');
@@ -138,4 +141,15 @@ function OffsetOfdeadLineAndCurrentTime(endOfTime) { // оприділяє рі�
             closeModal();
         }
     });
+
+    const modalTimerId = setTimeout(openModal, 10000);
+
+    function showModalByScroll() {
+        if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight){
+            openModal();
+            window.removeEventListener('scroll', showModalByScroll);
+        }
+    }
+
+    window.addEventListener('scroll', showModalByScroll);
 });
