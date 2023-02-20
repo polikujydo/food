@@ -105,4 +105,37 @@ function OffsetOfdeadLineAndCurrentTime(endOfTime) { // оприділяє рі�
 
    setClock('.timer', deadLine);
 
+        //-----------MODAL-------------
+
+    const modalOpenBtn = document.querySelectorAll('[data-modal]'),
+          modal = document.querySelector('.modal'),
+          modalCloseBtn = document.querySelector('[data-close]');
+    
+   modalOpenBtn.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal.classList.add('show');
+            modal.classList.remove('hide');
+            document.body.style.overflow = "hidden";
+    });
+   });
+
+   function closeModal() {
+        modal.classList.remove('show');
+        modal.classList.add('hide');
+        document.body.style.overflow = "";
+   }
+   modalCloseBtn.addEventListener('click', closeModal);
+
+   modal.addEventListener('click', (event) => {
+        if (event.target == modal){
+            closeModal();
+        }
+    });
+
+
+    document.addEventListener('keydown', (event) => {
+        if (event.code === "Escape") {
+            closeModal();
+        }
+    });
 });
