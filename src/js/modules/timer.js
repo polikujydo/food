@@ -1,5 +1,4 @@
-function timer(){
-    const deadLine = '2023-03-01';
+function timer(id, deadLine){
 
 function OffsetOfdeadLineAndCurrentTime(endOfTime) { // оприділяє різницю між deadLine і текущим часом 
  // задача ф-ції получити різницю між датами
@@ -63,7 +62,7 @@ function setClock(selector, endOfTime ){
         
 }
 
-   setClock('.timer', deadLine);
+   setClock(id, deadLine);
 }
 
-module.exports = timer;
+export default timer;
